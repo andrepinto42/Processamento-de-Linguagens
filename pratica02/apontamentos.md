@@ -1,17 +1,27 @@
 # Prática
 
-*Maquina nativa do stor?*
+## Inicialização
 
-https://nature.di.uminho.pt/~jj/pl-22
+Fazer download do [Material](https://nature.di.uminho.pt/~jj/pl-22)
 
-Directory : musica2022/
+Estando na diretoria do source
 
-Contem 989 musicas
+```
+cat musica2022/musica/* > grande.txt
+```
+Colocar toda a informação disponivel das músicas em um só ficheiro
+
+-----
+
+Contem 989 musicas que vamos usar para fazer parsing do seu conteudo
+* Descobrir *autor*, *ano*, *titulo*
+* Descobrir *lyrics*
+* Descobrir a *pauta* musical de uma música
 
 -------
 
 ### Comandos
-_**comando grep conhece expressoes regulares**_
+comando `grep` conhece expressoes regulares
 
 usar o . para dar match com qualquer carater
 
@@ -31,59 +41,62 @@ grep -o 'title.*Deolinda' grande.txt -> mostra a linha toda
 
 > apanha o primeiro carater que nao seja o ^ até o chegar ao carater que é um ^
 --------------------
-regular Expression :
+Usar *regular expressions* dentro do editor de texto
 
-title: \*(.\*)
+Expressão a procurar :
+* `title: *(.*)`
+
+Procura todas as strings que comecam por `title:` e apanha tudo que tiver à frente e ***agrupa o que apanhou para o grupo 1***
 
 replace:
-
-\<h1>$1</h1\>
+* `<h1>$1</h1>` 
 
 
 --------------
 
+## Comandos da *bash* para gerar ficheiros HTML
 
- 2026  perl -pe 's!title: \*(.\*)!\<h1>$1</h1\>!' grande.txt > _2.html
+```
+ perl -pe 's!title: *(.*)!<h1>$1</h1>!' grande.txt > _2.html
+```
 
- 
- 2027  firefox _2.html 
- 
- 2028  cp grande.txt _1.html
- 
- 2029  firefox _1.html 
- 
- 2030  cp grande.txt _1.html
- 
- 2031  firefox _1.html 
- 
- 2032  history
+Gera um ficheiro HTML onde substitui title: "titulo" por uma *tag* HTML
+
+```
+title: António variações    | original
+<h1>António variações</h1>  | final
+```
+
+De seguida abrir o ficheiro HTML
+```
+firefox _2.html
+```  
+
 
 
  ------------
 
  perl -p
 
- substitui a linha e depois dá print denovo
-
-
+> Substitui a linha e depois dá print denovo
 
  ---------
 
- regex(a)
+regex(a)
 
- string : aaaaaaaaaaaaaaa
+string : aaaaaaaaaaaaaaa
 
- substitute : ($1)
+substitute : ($1)
 
- result -> (a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)
+result -> (a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)(a)
 
  -------------------
 
-### SED
+### **SED**
 
  sed -> stream editor
 
-_COMANDOS** PARA EXECUTAR_
+_COMANDOS PARA EXECUTAR_
 
 * sed -rn '/title:/ s!title!!;p' grande.txt 
 
@@ -97,28 +110,37 @@ _COMANDOS** PARA EXECUTAR_
 -------------
 
 grep -P
+>expressoes regulares do Pearl
 
-expressoes regulares do Pearl
 grep -z
 
-expressoes regulares linha  a linha 
+>expressoes regulares linha  a linha 
 
 ### SED
-
+```
 sed -rn '/<abc/,/<.abc>/p' grande.txt
-
+```
 ### grep
-grep -P -zo '<abc>(.*\n)*?</abc>' grande.txt // comando demasiado complexo
+```
+grep -P -zo '<abc>(.*\n)*?</abc>' grande.txt
+```
+comando demasiado *complexo*
+```
+grep -P -zo '<abc>[^<]*</abc>' grande.txt
+```
+Mesmo comando mas mais *simples*
 
-grep -P -zo '<abc>[^<]*</abc>' grande.txt  // mesmo comando mas mais simples
-
+Redirecionar para o ficheiro x.abc
+```
+grep -P -zo '<abc>[^<]*</abc>' grande.txt > x.abc
+```
 ----------------
 
 executar:
 
 >abcm2ps x.abc
 
-Out.ps contem uma pauta de musica
+Isto cria o ficheiro *Out.ps* que contém uma pauta de musica :)
 
 -----------
 
