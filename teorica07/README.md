@@ -14,7 +14,7 @@ Para isso existem as *Autómatos Finitos Deterministas*
 
 --------------
 Também existe
-## Gramaticas Regulares
+## Gramáticas Regulares
 
 ### Regras para a construcao de frases
 
@@ -28,9 +28,9 @@ P -> Conjunto P de regras, mediante as restriçoes que são colocados neste grup
 
 
 Simbolos Terminais:
-1. Sinais: sao constituidos por um carater
+1. Sinais: são constituidos por um caráter
 2. Palavras reservadas:  string constantes
-3. Terminais variáveis: identificadores, inteiros, etc; *Definidos por expressoes regulares*
+3. Terminais variáveis: identificadores, inteiros, etc; *Definidos por expressões regulares*
 
 
 Exemplo de frases validas
@@ -39,7 +39,7 @@ Exemplo de frases validas
 * ((())())
 ```
 T = { ')', '(' }
-N = {}
+N = { }
 P = {S -> ... }
 ```
 
@@ -62,19 +62,23 @@ P = {
                 | ',' inteiro Cont // falha neste condição
 
     }
-// Na gramatica regular não pode ter mais do lado esquerdo 1 terminal e 1 regular
+// Na gramática regular não pode ter mais do lado esquerdo 1 terminal e 1 regular
 ```
 
 ---------------------
 ## Maquina de Estado para um inteiro
+Representação de um inteiro REGEX:
 
 `inteiro = (\+|-)?\d+`
 
-||+|-|d|
+
+|Estado|+|-|d|
 |:-:|-|-|-|
 S|A|A|B
 A|-|-|B
 B|-|-|B
+
+Conversão para máquina de estado
 ```
 S -> '+' A
 
