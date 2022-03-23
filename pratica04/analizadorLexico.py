@@ -19,8 +19,14 @@ tokens = (
     'RPAREN'
 )
 
+
+#Lista de tokens, tipos de coisas que vao ser retornadas
 tokens ="ID INT CHAR IF INTEIRO".split(" ")
+
+#
 literals = "* + - / = ( ) { }".split(" ")
+
+#
 reservadas = "if else int char bool".split(" ")
 
 def t_Inteiro(t):
@@ -35,8 +41,20 @@ def t_ID(t):
         t.type = t.value.upper()
     return t
 
-t_ignore = ' \t\n'
+t_ignore =' \t\n'
 
 def t_error(t):
     print("Ilegall Character",t)
     t.lexer.skip(1)
+
+#Build the lexer
+processador = lex.lex()
+
+
+#Give the lexer some input
+processador.input(codigo)
+
+
+#Tokenize
+while tok:=processador.token():
+    print(tok)

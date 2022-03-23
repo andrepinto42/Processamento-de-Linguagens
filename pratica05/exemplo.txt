@@ -1,0 +1,11 @@
+toffu 2€
+maças 2€
+cebolas 2.5€
+subtotal: =
+off
+cenouras 21€
+on
+arroz 4€
+banana 1€
+morangos 3.2€
+total: =
