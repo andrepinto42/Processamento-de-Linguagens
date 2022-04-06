@@ -1,0 +1,175 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> Li
+Rule 1     Li -> [ ni : ni ]
+Rule 2     Li -> [ Es ]
+Rule 3     Li -> [ ]
+Rule 4     Es -> N , Es
+Rule 5     Es -> N
+Rule 6     N -> Li
+Rule 7     N -> ni
+
+Terminals, with rules where they appear
+
+,                    : 4
+:                    : 1
+[                    : 1 2 3
+]                    : 1 2 3
+error                : 
+ni                   : 1 1 7
+
+Nonterminals, with rules where they appear
+
+Es                   : 2 4
+Li                   : 6 0
+N                    : 4 5
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . Li
+    (1) Li -> . [ ni : ni ]
+    (2) Li -> . [ Es ]
+    (3) Li -> . [ ]
+
+    [               shift and go to state 2
+
+    Li                             shift and go to state 1
+
+state 1
+
+    (0) S' -> Li .
+
+
+
+state 2
+
+    (1) Li -> [ . ni : ni ]
+    (2) Li -> [ . Es ]
+    (3) Li -> [ . ]
+    (4) Es -> . N , Es
+    (5) Es -> . N
+    (6) N -> . Li
+    (7) N -> . ni
+    (1) Li -> . [ ni : ni ]
+    (2) Li -> . [ Es ]
+    (3) Li -> . [ ]
+
+    ni              shift and go to state 3
+    ]               shift and go to state 4
+    [               shift and go to state 2
+
+    Es                             shift and go to state 5
+    N                              shift and go to state 6
+    Li                             shift and go to state 7
+
+state 3
+
+    (1) Li -> [ ni . : ni ]
+    (7) N -> ni .
+
+    :               shift and go to state 8
+    ,               reduce using rule 7 (N -> ni .)
+    ]               reduce using rule 7 (N -> ni .)
+
+
+state 4
+
+    (3) Li -> [ ] .
+
+    $end            reduce using rule 3 (Li -> [ ] .)
+    ,               reduce using rule 3 (Li -> [ ] .)
+    ]               reduce using rule 3 (Li -> [ ] .)
+
+
+state 5
+
+    (2) Li -> [ Es . ]
+
+    ]               shift and go to state 9
+
+
+state 6
+
+    (4) Es -> N . , Es
+    (5) Es -> N .
+
+    ,               shift and go to state 10
+    ]               reduce using rule 5 (Es -> N .)
+
+
+state 7
+
+    (6) N -> Li .
+
+    ,               reduce using rule 6 (N -> Li .)
+    ]               reduce using rule 6 (N -> Li .)
+
+
+state 8
+
+    (1) Li -> [ ni : . ni ]
+
+    ni              shift and go to state 11
+
+
+state 9
+
+    (2) Li -> [ Es ] .
+
+    $end            reduce using rule 2 (Li -> [ Es ] .)
+    ,               reduce using rule 2 (Li -> [ Es ] .)
+    ]               reduce using rule 2 (Li -> [ Es ] .)
+
+
+state 10
+
+    (4) Es -> N , . Es
+    (4) Es -> . N , Es
+    (5) Es -> . N
+    (6) N -> . Li
+    (7) N -> . ni
+    (1) Li -> . [ ni : ni ]
+    (2) Li -> . [ Es ]
+    (3) Li -> . [ ]
+
+    ni              shift and go to state 13
+    [               shift and go to state 2
+
+    N                              shift and go to state 6
+    Es                             shift and go to state 12
+    Li                             shift and go to state 7
+
+state 11
+
+    (1) Li -> [ ni : ni . ]
+
+    ]               shift and go to state 14
+
+
+state 12
+
+    (4) Es -> N , Es .
+
+    ]               reduce using rule 4 (Es -> N , Es .)
+
+
+state 13
+
+    (7) N -> ni .
+
+    ,               reduce using rule 7 (N -> ni .)
+    ]               reduce using rule 7 (N -> ni .)
+
+
+state 14
+
+    (1) Li -> [ ni : ni ] .
+
+    $end            reduce using rule 1 (Li -> [ ni : ni ] .)
+    ,               reduce using rule 1 (Li -> [ ni : ni ] .)
+    ]               reduce using rule 1 (Li -> [ ni : ni ] .)
+

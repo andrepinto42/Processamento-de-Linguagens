@@ -1,0 +1,156 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> FS
+Rule 1     FS -> Dir
+Rule 2     Dir -> id { Filhos }
+Rule 3     Dir -> id { }
+Rule 4     Filhos -> Filho
+Rule 5     Filhos -> Filho , Filhos
+Rule 6     Filho -> id
+Rule 7     Filho -> Dir
+
+Terminals, with rules where they appear
+
+,                    : 5
+error                : 
+id                   : 2 3 6
+{                    : 2 3
+}                    : 2 3
+
+Nonterminals, with rules where they appear
+
+Dir                  : 1 7
+FS                   : 0
+Filho                : 4 5
+Filhos               : 2 5
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . FS
+    (1) FS -> . Dir
+    (2) Dir -> . id { Filhos }
+    (3) Dir -> . id { }
+
+    id              shift and go to state 3
+
+    FS                             shift and go to state 1
+    Dir                            shift and go to state 2
+
+state 1
+
+    (0) S' -> FS .
+
+
+
+state 2
+
+    (1) FS -> Dir .
+
+    $end            reduce using rule 1 (FS -> Dir .)
+
+
+state 3
+
+    (2) Dir -> id . { Filhos }
+    (3) Dir -> id . { }
+
+    {               shift and go to state 4
+
+
+state 4
+
+    (2) Dir -> id { . Filhos }
+    (3) Dir -> id { . }
+    (4) Filhos -> . Filho
+    (5) Filhos -> . Filho , Filhos
+    (6) Filho -> . id
+    (7) Filho -> . Dir
+    (2) Dir -> . id { Filhos }
+    (3) Dir -> . id { }
+
+    }               shift and go to state 7
+    id              shift and go to state 5
+
+    Filhos                         shift and go to state 6
+    Filho                          shift and go to state 8
+    Dir                            shift and go to state 9
+
+state 5
+
+    (6) Filho -> id .
+    (2) Dir -> id . { Filhos }
+    (3) Dir -> id . { }
+
+    ,               reduce using rule 6 (Filho -> id .)
+    }               reduce using rule 6 (Filho -> id .)
+    {               shift and go to state 4
+
+
+state 6
+
+    (2) Dir -> id { Filhos . }
+
+    }               shift and go to state 10
+
+
+state 7
+
+    (3) Dir -> id { } .
+
+    $end            reduce using rule 3 (Dir -> id { } .)
+    ,               reduce using rule 3 (Dir -> id { } .)
+    }               reduce using rule 3 (Dir -> id { } .)
+
+
+state 8
+
+    (4) Filhos -> Filho .
+    (5) Filhos -> Filho . , Filhos
+
+    }               reduce using rule 4 (Filhos -> Filho .)
+    ,               shift and go to state 11
+
+
+state 9
+
+    (7) Filho -> Dir .
+
+    ,               reduce using rule 7 (Filho -> Dir .)
+    }               reduce using rule 7 (Filho -> Dir .)
+
+
+state 10
+
+    (2) Dir -> id { Filhos } .
+
+    $end            reduce using rule 2 (Dir -> id { Filhos } .)
+    ,               reduce using rule 2 (Dir -> id { Filhos } .)
+    }               reduce using rule 2 (Dir -> id { Filhos } .)
+
+
+state 11
+
+    (5) Filhos -> Filho , . Filhos
+    (4) Filhos -> . Filho
+    (5) Filhos -> . Filho , Filhos
+    (6) Filho -> . id
+    (7) Filho -> . Dir
+    (2) Dir -> . id { Filhos }
+    (3) Dir -> . id { }
+
+    id              shift and go to state 5
+
+    Filho                          shift and go to state 8
+    Filhos                         shift and go to state 12
+    Dir                            shift and go to state 9
+
+state 12
+
+    (5) Filhos -> Filho , Filhos .
+
+    }               reduce using rule 5 (Filhos -> Filho , Filhos .)
+
