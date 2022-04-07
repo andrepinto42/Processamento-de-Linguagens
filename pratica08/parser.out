@@ -1,0 +1,338 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> prog
+Rule 1     prog -> comandos
+Rule 2     comandos -> <empty>
+Rule 3     comandos -> comandos comando
+Rule 4     comando -> atrib
+Rule 5     comando -> print
+Rule 6     comando -> read
+Rule 7     comando -> dump
+Rule 8     atrib -> ID = Exp
+Rule 9     print -> PRINT Exp
+Rule 10    read -> READ ID
+Rule 11    dump -> DUMP
+Rule 12    Exp -> Exp + Exp
+Rule 13    Exp -> Exp - Exp
+Rule 14    Exp -> INT
+Rule 15    Exp -> ID
+
+Terminals, with rules where they appear
+
++                    : 12
+-                    : 13
+=                    : 8
+DUMP                 : 11
+ID                   : 8 10 15
+INT                  : 14
+PRINT                : 9
+READ                 : 10
+error                : 
+
+Nonterminals, with rules where they appear
+
+Exp                  : 8 9 12 12 13 13
+atrib                : 4
+comando              : 3
+comandos             : 1 3
+dump                 : 7
+print                : 5
+prog                 : 0
+read                 : 6
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . prog
+    (1) prog -> . comandos
+    (2) comandos -> .
+    (3) comandos -> . comandos comando
+
+    ID              reduce using rule 2 (comandos -> .)
+    PRINT           reduce using rule 2 (comandos -> .)
+    READ            reduce using rule 2 (comandos -> .)
+    DUMP            reduce using rule 2 (comandos -> .)
+    $end            reduce using rule 2 (comandos -> .)
+
+    prog                           shift and go to state 1
+    comandos                       shift and go to state 2
+
+state 1
+
+    (0) S' -> prog .
+
+
+
+state 2
+
+    (1) prog -> comandos .
+    (3) comandos -> comandos . comando
+    (4) comando -> . atrib
+    (5) comando -> . print
+    (6) comando -> . read
+    (7) comando -> . dump
+    (8) atrib -> . ID = Exp
+    (9) print -> . PRINT Exp
+    (10) read -> . READ ID
+    (11) dump -> . DUMP
+
+    $end            reduce using rule 1 (prog -> comandos .)
+    ID              shift and go to state 8
+    PRINT           shift and go to state 9
+    READ            shift and go to state 10
+    DUMP            shift and go to state 11
+
+    comando                        shift and go to state 3
+    atrib                          shift and go to state 4
+    print                          shift and go to state 5
+    read                           shift and go to state 6
+    dump                           shift and go to state 7
+
+state 3
+
+    (3) comandos -> comandos comando .
+
+    ID              reduce using rule 3 (comandos -> comandos comando .)
+    PRINT           reduce using rule 3 (comandos -> comandos comando .)
+    READ            reduce using rule 3 (comandos -> comandos comando .)
+    DUMP            reduce using rule 3 (comandos -> comandos comando .)
+    $end            reduce using rule 3 (comandos -> comandos comando .)
+
+
+state 4
+
+    (4) comando -> atrib .
+
+    ID              reduce using rule 4 (comando -> atrib .)
+    PRINT           reduce using rule 4 (comando -> atrib .)
+    READ            reduce using rule 4 (comando -> atrib .)
+    DUMP            reduce using rule 4 (comando -> atrib .)
+    $end            reduce using rule 4 (comando -> atrib .)
+
+
+state 5
+
+    (5) comando -> print .
+
+    ID              reduce using rule 5 (comando -> print .)
+    PRINT           reduce using rule 5 (comando -> print .)
+    READ            reduce using rule 5 (comando -> print .)
+    DUMP            reduce using rule 5 (comando -> print .)
+    $end            reduce using rule 5 (comando -> print .)
+
+
+state 6
+
+    (6) comando -> read .
+
+    ID              reduce using rule 6 (comando -> read .)
+    PRINT           reduce using rule 6 (comando -> read .)
+    READ            reduce using rule 6 (comando -> read .)
+    DUMP            reduce using rule 6 (comando -> read .)
+    $end            reduce using rule 6 (comando -> read .)
+
+
+state 7
+
+    (7) comando -> dump .
+
+    ID              reduce using rule 7 (comando -> dump .)
+    PRINT           reduce using rule 7 (comando -> dump .)
+    READ            reduce using rule 7 (comando -> dump .)
+    DUMP            reduce using rule 7 (comando -> dump .)
+    $end            reduce using rule 7 (comando -> dump .)
+
+
+state 8
+
+    (8) atrib -> ID . = Exp
+
+    =               shift and go to state 12
+
+
+state 9
+
+    (9) print -> PRINT . Exp
+    (12) Exp -> . Exp + Exp
+    (13) Exp -> . Exp - Exp
+    (14) Exp -> . INT
+    (15) Exp -> . ID
+
+    INT             shift and go to state 14
+    ID              shift and go to state 15
+
+    Exp                            shift and go to state 13
+
+state 10
+
+    (10) read -> READ . ID
+
+    ID              shift and go to state 16
+
+
+state 11
+
+    (11) dump -> DUMP .
+
+    ID              reduce using rule 11 (dump -> DUMP .)
+    PRINT           reduce using rule 11 (dump -> DUMP .)
+    READ            reduce using rule 11 (dump -> DUMP .)
+    DUMP            reduce using rule 11 (dump -> DUMP .)
+    $end            reduce using rule 11 (dump -> DUMP .)
+
+
+state 12
+
+    (8) atrib -> ID = . Exp
+    (12) Exp -> . Exp + Exp
+    (13) Exp -> . Exp - Exp
+    (14) Exp -> . INT
+    (15) Exp -> . ID
+
+    INT             shift and go to state 14
+    ID              shift and go to state 15
+
+    Exp                            shift and go to state 17
+
+state 13
+
+    (9) print -> PRINT Exp .
+    (12) Exp -> Exp . + Exp
+    (13) Exp -> Exp . - Exp
+
+    ID              reduce using rule 9 (print -> PRINT Exp .)
+    PRINT           reduce using rule 9 (print -> PRINT Exp .)
+    READ            reduce using rule 9 (print -> PRINT Exp .)
+    DUMP            reduce using rule 9 (print -> PRINT Exp .)
+    $end            reduce using rule 9 (print -> PRINT Exp .)
+    +               shift and go to state 18
+    -               shift and go to state 19
+
+
+state 14
+
+    (14) Exp -> INT .
+
+    +               reduce using rule 14 (Exp -> INT .)
+    -               reduce using rule 14 (Exp -> INT .)
+    ID              reduce using rule 14 (Exp -> INT .)
+    PRINT           reduce using rule 14 (Exp -> INT .)
+    READ            reduce using rule 14 (Exp -> INT .)
+    DUMP            reduce using rule 14 (Exp -> INT .)
+    $end            reduce using rule 14 (Exp -> INT .)
+
+
+state 15
+
+    (15) Exp -> ID .
+
+    +               reduce using rule 15 (Exp -> ID .)
+    -               reduce using rule 15 (Exp -> ID .)
+    ID              reduce using rule 15 (Exp -> ID .)
+    PRINT           reduce using rule 15 (Exp -> ID .)
+    READ            reduce using rule 15 (Exp -> ID .)
+    DUMP            reduce using rule 15 (Exp -> ID .)
+    $end            reduce using rule 15 (Exp -> ID .)
+
+
+state 16
+
+    (10) read -> READ ID .
+
+    ID              reduce using rule 10 (read -> READ ID .)
+    PRINT           reduce using rule 10 (read -> READ ID .)
+    READ            reduce using rule 10 (read -> READ ID .)
+    DUMP            reduce using rule 10 (read -> READ ID .)
+    $end            reduce using rule 10 (read -> READ ID .)
+
+
+state 17
+
+    (8) atrib -> ID = Exp .
+    (12) Exp -> Exp . + Exp
+    (13) Exp -> Exp . - Exp
+
+    ID              reduce using rule 8 (atrib -> ID = Exp .)
+    PRINT           reduce using rule 8 (atrib -> ID = Exp .)
+    READ            reduce using rule 8 (atrib -> ID = Exp .)
+    DUMP            reduce using rule 8 (atrib -> ID = Exp .)
+    $end            reduce using rule 8 (atrib -> ID = Exp .)
+    +               shift and go to state 18
+    -               shift and go to state 19
+
+
+state 18
+
+    (12) Exp -> Exp + . Exp
+    (12) Exp -> . Exp + Exp
+    (13) Exp -> . Exp - Exp
+    (14) Exp -> . INT
+    (15) Exp -> . ID
+
+    INT             shift and go to state 14
+    ID              shift and go to state 15
+
+    Exp                            shift and go to state 20
+
+state 19
+
+    (13) Exp -> Exp - . Exp
+    (12) Exp -> . Exp + Exp
+    (13) Exp -> . Exp - Exp
+    (14) Exp -> . INT
+    (15) Exp -> . ID
+
+    INT             shift and go to state 14
+    ID              shift and go to state 15
+
+    Exp                            shift and go to state 21
+
+state 20
+
+    (12) Exp -> Exp + Exp .
+    (12) Exp -> Exp . + Exp
+    (13) Exp -> Exp . - Exp
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+    ID              reduce using rule 12 (Exp -> Exp + Exp .)
+    PRINT           reduce using rule 12 (Exp -> Exp + Exp .)
+    READ            reduce using rule 12 (Exp -> Exp + Exp .)
+    DUMP            reduce using rule 12 (Exp -> Exp + Exp .)
+    $end            reduce using rule 12 (Exp -> Exp + Exp .)
+    +               shift and go to state 18
+    -               shift and go to state 19
+
+  ! +               [ reduce using rule 12 (Exp -> Exp + Exp .) ]
+  ! -               [ reduce using rule 12 (Exp -> Exp + Exp .) ]
+
+
+state 21
+
+    (13) Exp -> Exp - Exp .
+    (12) Exp -> Exp . + Exp
+    (13) Exp -> Exp . - Exp
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+    ID              reduce using rule 13 (Exp -> Exp - Exp .)
+    PRINT           reduce using rule 13 (Exp -> Exp - Exp .)
+    READ            reduce using rule 13 (Exp -> Exp - Exp .)
+    DUMP            reduce using rule 13 (Exp -> Exp - Exp .)
+    $end            reduce using rule 13 (Exp -> Exp - Exp .)
+    +               shift and go to state 18
+    -               shift and go to state 19
+
+  ! +               [ reduce using rule 13 (Exp -> Exp - Exp .) ]
+  ! -               [ reduce using rule 13 (Exp -> Exp - Exp .) ]
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for + in state 20 resolved as shift
+WARNING: shift/reduce conflict for - in state 20 resolved as shift
+WARNING: shift/reduce conflict for + in state 21 resolved as shift
+WARNING: shift/reduce conflict for - in state 21 resolved as shift

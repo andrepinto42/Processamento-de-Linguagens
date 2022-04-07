@@ -52,5 +52,12 @@ if len(sys.argv) == 2:
 print("\nString Inicial",str);
 result = parser.parse(str)
 print("Resultado ->\n\n",result)
+
+
+import os
+
+# usar o sh para utilizar um ficheiro como se fosse comandos da bash
+os.system(result)
+
 # Para debugging
 #while tok:= lexer.token() : print(tok)

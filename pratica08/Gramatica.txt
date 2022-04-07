@@ -1,0 +1,23 @@
+Gramatica
+
+prog : comandos
+
+comandos : empty
+        | comandos comando
+
+comando : atrib
+        | print
+        | read
+        | dump
+
+atrib : id '=' Exp
+
+print : PRINT Exp
+
+read : READ id
+
+dump : DUMP
+
+Exp : Exp '+' Exp
+Exp : Exp '-' Exp
+Exp : id
