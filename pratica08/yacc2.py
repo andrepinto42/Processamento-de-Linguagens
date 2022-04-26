@@ -1,5 +1,5 @@
 import ply.yacc as yacc
-from calc import tokens 
+from calc2 import tokens 
 import sys
 
 def p_prog(p):
@@ -43,6 +43,47 @@ def p_dump(p):
     "dump : DUMP"
     print(p.parser.tabela_ids)
 
+
+def p_aexp_01(p):
+    "aexp : termo"
+    p[0] = p[1]
+
+def p_aexp_soma(p):
+    "aexp : aexp '+' termo"
+    p[0] = p[1] + p[3]
+
+
+def p_aexp_subtracao(p):
+    "aexp : aexp '-' termo"
+    p[0] = p[1] - p[3]
+
+
+
+def p_termo_01(p):
+    "termo : fator"
+    p[0] = p[1]
+
+
+def p_termo_mult(p):
+    "termo : termo '*' fator"
+    p[0] = p[1] * p[3]
+
+
+def p_termo_div(p):
+    "termo : termo '/' fator"
+    p[0] = p[1] / p[3]
+
+
+def p_fator_01(p):
+    "fator : INT"
+    p[0] = p[1]
+
+
+def p_fator_01(p):
+    "fator : ID"
+    p[0] = p[1]
+
+# Remove this
 def p_Exp01(p):
     "Exp : Exp '+' Exp"
     p[0] = p[1] + p[3]
@@ -63,6 +104,7 @@ def p_Exp04(p):
         print("Variavel nao definida!, vai ser assumida como 0")
         p[0] = 0
 
+# Até aqui
 
 def p_error(p):
     print("Error")
