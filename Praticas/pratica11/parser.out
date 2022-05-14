@@ -1,0 +1,552 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> prog
+Rule 1     prog -> decls instrs
+Rule 2     decls -> <empty>
+Rule 3     decls -> decls decl
+Rule 4     decl -> INTKEYWORD ID ;
+Rule 5     instrs -> <empty>
+Rule 6     instrs -> instrs instr
+Rule 7     instr -> ID = exp ;
+Rule 8     instr -> PRINT exp ;
+Rule 9     exp -> exp + exp
+Rule 10    exp -> exp - exp
+Rule 11    exp -> exp * exp
+Rule 12    exp -> exp / exp
+Rule 13    exp -> exp ^ exp
+Rule 14    exp -> INT
+Rule 15    exp -> ID
+Rule 16    exp -> ( exp )
+Rule 17    exp -> .
+
+Terminals, with rules where they appear
+
+(                    : 16
+)                    : 16
+*                    : 11
++                    : 9
+-                    : 10
+.                    : 17
+/                    : 12
+;                    : 4 7 8
+=                    : 7
+ID                   : 4 7 15
+INT                  : 14
+INTKEYWORD           : 4
+PRINT                : 8
+^                    : 13
+error                : 
+
+Nonterminals, with rules where they appear
+
+decl                 : 3
+decls                : 1 3
+exp                  : 7 8 9 9 10 10 11 11 12 12 13 13 16
+instr                : 6
+instrs               : 1 6
+prog                 : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . prog
+    (1) prog -> . decls instrs
+    (2) decls -> .
+    (3) decls -> . decls decl
+
+    INTKEYWORD      reduce using rule 2 (decls -> .)
+    ID              reduce using rule 2 (decls -> .)
+    PRINT           reduce using rule 2 (decls -> .)
+    $end            reduce using rule 2 (decls -> .)
+
+    prog                           shift and go to state 1
+    decls                          shift and go to state 2
+
+state 1
+
+    (0) S' -> prog .
+
+
+
+state 2
+
+    (1) prog -> decls . instrs
+    (3) decls -> decls . decl
+    (5) instrs -> .
+    (6) instrs -> . instrs instr
+    (4) decl -> . INTKEYWORD ID ;
+
+    ID              reduce using rule 5 (instrs -> .)
+    PRINT           reduce using rule 5 (instrs -> .)
+    $end            reduce using rule 5 (instrs -> .)
+    INTKEYWORD      shift and go to state 5
+
+    instrs                         shift and go to state 3
+    decl                           shift and go to state 4
+
+state 3
+
+    (1) prog -> decls instrs .
+    (6) instrs -> instrs . instr
+    (7) instr -> . ID = exp ;
+    (8) instr -> . PRINT exp ;
+
+    $end            reduce using rule 1 (prog -> decls instrs .)
+    ID              shift and go to state 7
+    PRINT           shift and go to state 8
+
+    instr                          shift and go to state 6
+
+state 4
+
+    (3) decls -> decls decl .
+
+    INTKEYWORD      reduce using rule 3 (decls -> decls decl .)
+    ID              reduce using rule 3 (decls -> decls decl .)
+    PRINT           reduce using rule 3 (decls -> decls decl .)
+    $end            reduce using rule 3 (decls -> decls decl .)
+
+
+state 5
+
+    (4) decl -> INTKEYWORD . ID ;
+
+    ID              shift and go to state 9
+
+
+state 6
+
+    (6) instrs -> instrs instr .
+
+    ID              reduce using rule 6 (instrs -> instrs instr .)
+    PRINT           reduce using rule 6 (instrs -> instrs instr .)
+    $end            reduce using rule 6 (instrs -> instrs instr .)
+
+
+state 7
+
+    (7) instr -> ID . = exp ;
+
+    =               shift and go to state 10
+
+
+state 8
+
+    (8) instr -> PRINT . exp ;
+    (9) exp -> . exp + exp
+    (10) exp -> . exp - exp
+    (11) exp -> . exp * exp
+    (12) exp -> . exp / exp
+    (13) exp -> . exp ^ exp
+    (14) exp -> . INT
+    (15) exp -> . ID
+    (16) exp -> . ( exp )
+    (17) exp -> . .
+
+    INT             shift and go to state 12
+    ID              shift and go to state 13
+    (               shift and go to state 14
+    .               shift and go to state 15
+
+    exp                            shift and go to state 11
+
+state 9
+
+    (4) decl -> INTKEYWORD ID . ;
+
+    ;               shift and go to state 16
+
+
+state 10
+
+    (7) instr -> ID = . exp ;
+    (9) exp -> . exp + exp
+    (10) exp -> . exp - exp
+    (11) exp -> . exp * exp
+    (12) exp -> . exp / exp
+    (13) exp -> . exp ^ exp
+    (14) exp -> . INT
+    (15) exp -> . ID
+    (16) exp -> . ( exp )
+    (17) exp -> . .
+
+    INT             shift and go to state 12
+    ID              shift and go to state 13
+    (               shift and go to state 14
+    .               shift and go to state 15
+
+    exp                            shift and go to state 17
+
+state 11
+
+    (8) instr -> PRINT exp . ;
+    (9) exp -> exp . + exp
+    (10) exp -> exp . - exp
+    (11) exp -> exp . * exp
+    (12) exp -> exp . / exp
+    (13) exp -> exp . ^ exp
+
+    ;               shift and go to state 18
+    +               shift and go to state 19
+    -               shift and go to state 20
+    *               shift and go to state 21
+    /               shift and go to state 22
+    ^               shift and go to state 23
+
+
+state 12
+
+    (14) exp -> INT .
+
+    ;               reduce using rule 14 (exp -> INT .)
+    +               reduce using rule 14 (exp -> INT .)
+    -               reduce using rule 14 (exp -> INT .)
+    *               reduce using rule 14 (exp -> INT .)
+    /               reduce using rule 14 (exp -> INT .)
+    ^               reduce using rule 14 (exp -> INT .)
+    )               reduce using rule 14 (exp -> INT .)
+
+
+state 13
+
+    (15) exp -> ID .
+
+    ;               reduce using rule 15 (exp -> ID .)
+    +               reduce using rule 15 (exp -> ID .)
+    -               reduce using rule 15 (exp -> ID .)
+    *               reduce using rule 15 (exp -> ID .)
+    /               reduce using rule 15 (exp -> ID .)
+    ^               reduce using rule 15 (exp -> ID .)
+    )               reduce using rule 15 (exp -> ID .)
+
+
+state 14
+
+    (16) exp -> ( . exp )
+    (9) exp -> . exp + exp
+    (10) exp -> . exp - exp
+    (11) exp -> . exp * exp
+    (12) exp -> . exp / exp
+    (13) exp -> . exp ^ exp
+    (14) exp -> . INT
+    (15) exp -> . ID
+    (16) exp -> . ( exp )
+    (17) exp -> . .
+
+    INT             shift and go to state 12
+    ID              shift and go to state 13
+    (               shift and go to state 14
+    .               shift and go to state 15
+
+    exp                            shift and go to state 24
+
+state 15
+
+    (17) exp -> . .
+
+    ;               reduce using rule 17 (exp -> . .)
+    +               reduce using rule 17 (exp -> . .)
+    -               reduce using rule 17 (exp -> . .)
+    *               reduce using rule 17 (exp -> . .)
+    /               reduce using rule 17 (exp -> . .)
+    ^               reduce using rule 17 (exp -> . .)
+    )               reduce using rule 17 (exp -> . .)
+
+
+state 16
+
+    (4) decl -> INTKEYWORD ID ; .
+
+    INTKEYWORD      reduce using rule 4 (decl -> INTKEYWORD ID ; .)
+    ID              reduce using rule 4 (decl -> INTKEYWORD ID ; .)
+    PRINT           reduce using rule 4 (decl -> INTKEYWORD ID ; .)
+    $end            reduce using rule 4 (decl -> INTKEYWORD ID ; .)
+
+
+state 17
+
+    (7) instr -> ID = exp . ;
+    (9) exp -> exp . + exp
+    (10) exp -> exp . - exp
+    (11) exp -> exp . * exp
+    (12) exp -> exp . / exp
+    (13) exp -> exp . ^ exp
+
+    ;               shift and go to state 25
+    +               shift and go to state 19
+    -               shift and go to state 20
+    *               shift and go to state 21
+    /               shift and go to state 22
+    ^               shift and go to state 23
+
+
+state 18
+
+    (8) instr -> PRINT exp ; .
+
+    ID              reduce using rule 8 (instr -> PRINT exp ; .)
+    PRINT           reduce using rule 8 (instr -> PRINT exp ; .)
+    $end            reduce using rule 8 (instr -> PRINT exp ; .)
+
+
+state 19
+
+    (9) exp -> exp + . exp
+    (9) exp -> . exp + exp
+    (10) exp -> . exp - exp
+    (11) exp -> . exp * exp
+    (12) exp -> . exp / exp
+    (13) exp -> . exp ^ exp
+    (14) exp -> . INT
+    (15) exp -> . ID
+    (16) exp -> . ( exp )
+    (17) exp -> . .
+
+    INT             shift and go to state 12
+    ID              shift and go to state 13
+    (               shift and go to state 14
+    .               shift and go to state 15
+
+    exp                            shift and go to state 26
+
+state 20
+
+    (10) exp -> exp - . exp
+    (9) exp -> . exp + exp
+    (10) exp -> . exp - exp
+    (11) exp -> . exp * exp
+    (12) exp -> . exp / exp
+    (13) exp -> . exp ^ exp
+    (14) exp -> . INT
+    (15) exp -> . ID
+    (16) exp -> . ( exp )
+    (17) exp -> . .
+
+    INT             shift and go to state 12
+    ID              shift and go to state 13
+    (               shift and go to state 14
+    .               shift and go to state 15
+
+    exp                            shift and go to state 27
+
+state 21
+
+    (11) exp -> exp * . exp
+    (9) exp -> . exp + exp
+    (10) exp -> . exp - exp
+    (11) exp -> . exp * exp
+    (12) exp -> . exp / exp
+    (13) exp -> . exp ^ exp
+    (14) exp -> . INT
+    (15) exp -> . ID
+    (16) exp -> . ( exp )
+    (17) exp -> . .
+
+    INT             shift and go to state 12
+    ID              shift and go to state 13
+    (               shift and go to state 14
+    .               shift and go to state 15
+
+    exp                            shift and go to state 28
+
+state 22
+
+    (12) exp -> exp / . exp
+    (9) exp -> . exp + exp
+    (10) exp -> . exp - exp
+    (11) exp -> . exp * exp
+    (12) exp -> . exp / exp
+    (13) exp -> . exp ^ exp
+    (14) exp -> . INT
+    (15) exp -> . ID
+    (16) exp -> . ( exp )
+    (17) exp -> . .
+
+    INT             shift and go to state 12
+    ID              shift and go to state 13
+    (               shift and go to state 14
+    .               shift and go to state 15
+
+    exp                            shift and go to state 29
+
+state 23
+
+    (13) exp -> exp ^ . exp
+    (9) exp -> . exp + exp
+    (10) exp -> . exp - exp
+    (11) exp -> . exp * exp
+    (12) exp -> . exp / exp
+    (13) exp -> . exp ^ exp
+    (14) exp -> . INT
+    (15) exp -> . ID
+    (16) exp -> . ( exp )
+    (17) exp -> . .
+
+    INT             shift and go to state 12
+    ID              shift and go to state 13
+    (               shift and go to state 14
+    .               shift and go to state 15
+
+    exp                            shift and go to state 30
+
+state 24
+
+    (16) exp -> ( exp . )
+    (9) exp -> exp . + exp
+    (10) exp -> exp . - exp
+    (11) exp -> exp . * exp
+    (12) exp -> exp . / exp
+    (13) exp -> exp . ^ exp
+
+    )               shift and go to state 31
+    +               shift and go to state 19
+    -               shift and go to state 20
+    *               shift and go to state 21
+    /               shift and go to state 22
+    ^               shift and go to state 23
+
+
+state 25
+
+    (7) instr -> ID = exp ; .
+
+    ID              reduce using rule 7 (instr -> ID = exp ; .)
+    PRINT           reduce using rule 7 (instr -> ID = exp ; .)
+    $end            reduce using rule 7 (instr -> ID = exp ; .)
+
+
+state 26
+
+    (9) exp -> exp + exp .
+    (9) exp -> exp . + exp
+    (10) exp -> exp . - exp
+    (11) exp -> exp . * exp
+    (12) exp -> exp . / exp
+    (13) exp -> exp . ^ exp
+
+    ;               reduce using rule 9 (exp -> exp + exp .)
+    +               reduce using rule 9 (exp -> exp + exp .)
+    -               reduce using rule 9 (exp -> exp + exp .)
+    )               reduce using rule 9 (exp -> exp + exp .)
+    *               shift and go to state 21
+    /               shift and go to state 22
+    ^               shift and go to state 23
+
+  ! *               [ reduce using rule 9 (exp -> exp + exp .) ]
+  ! /               [ reduce using rule 9 (exp -> exp + exp .) ]
+  ! ^               [ reduce using rule 9 (exp -> exp + exp .) ]
+  ! +               [ shift and go to state 19 ]
+  ! -               [ shift and go to state 20 ]
+
+
+state 27
+
+    (10) exp -> exp - exp .
+    (9) exp -> exp . + exp
+    (10) exp -> exp . - exp
+    (11) exp -> exp . * exp
+    (12) exp -> exp . / exp
+    (13) exp -> exp . ^ exp
+
+    ;               reduce using rule 10 (exp -> exp - exp .)
+    +               reduce using rule 10 (exp -> exp - exp .)
+    -               reduce using rule 10 (exp -> exp - exp .)
+    )               reduce using rule 10 (exp -> exp - exp .)
+    *               shift and go to state 21
+    /               shift and go to state 22
+    ^               shift and go to state 23
+
+  ! *               [ reduce using rule 10 (exp -> exp - exp .) ]
+  ! /               [ reduce using rule 10 (exp -> exp - exp .) ]
+  ! ^               [ reduce using rule 10 (exp -> exp - exp .) ]
+  ! +               [ shift and go to state 19 ]
+  ! -               [ shift and go to state 20 ]
+
+
+state 28
+
+    (11) exp -> exp * exp .
+    (9) exp -> exp . + exp
+    (10) exp -> exp . - exp
+    (11) exp -> exp . * exp
+    (12) exp -> exp . / exp
+    (13) exp -> exp . ^ exp
+
+    ;               reduce using rule 11 (exp -> exp * exp .)
+    +               reduce using rule 11 (exp -> exp * exp .)
+    -               reduce using rule 11 (exp -> exp * exp .)
+    *               reduce using rule 11 (exp -> exp * exp .)
+    /               reduce using rule 11 (exp -> exp * exp .)
+    )               reduce using rule 11 (exp -> exp * exp .)
+    ^               shift and go to state 23
+
+  ! ^               [ reduce using rule 11 (exp -> exp * exp .) ]
+  ! +               [ shift and go to state 19 ]
+  ! -               [ shift and go to state 20 ]
+  ! *               [ shift and go to state 21 ]
+  ! /               [ shift and go to state 22 ]
+
+
+state 29
+
+    (12) exp -> exp / exp .
+    (9) exp -> exp . + exp
+    (10) exp -> exp . - exp
+    (11) exp -> exp . * exp
+    (12) exp -> exp . / exp
+    (13) exp -> exp . ^ exp
+
+    ;               reduce using rule 12 (exp -> exp / exp .)
+    +               reduce using rule 12 (exp -> exp / exp .)
+    -               reduce using rule 12 (exp -> exp / exp .)
+    *               reduce using rule 12 (exp -> exp / exp .)
+    /               reduce using rule 12 (exp -> exp / exp .)
+    )               reduce using rule 12 (exp -> exp / exp .)
+    ^               shift and go to state 23
+
+  ! ^               [ reduce using rule 12 (exp -> exp / exp .) ]
+  ! +               [ shift and go to state 19 ]
+  ! -               [ shift and go to state 20 ]
+  ! *               [ shift and go to state 21 ]
+  ! /               [ shift and go to state 22 ]
+
+
+state 30
+
+    (13) exp -> exp ^ exp .
+    (9) exp -> exp . + exp
+    (10) exp -> exp . - exp
+    (11) exp -> exp . * exp
+    (12) exp -> exp . / exp
+    (13) exp -> exp . ^ exp
+
+    ;               reduce using rule 13 (exp -> exp ^ exp .)
+    +               reduce using rule 13 (exp -> exp ^ exp .)
+    -               reduce using rule 13 (exp -> exp ^ exp .)
+    *               reduce using rule 13 (exp -> exp ^ exp .)
+    /               reduce using rule 13 (exp -> exp ^ exp .)
+    )               reduce using rule 13 (exp -> exp ^ exp .)
+    ^               shift and go to state 23
+
+  ! ^               [ reduce using rule 13 (exp -> exp ^ exp .) ]
+  ! +               [ shift and go to state 19 ]
+  ! -               [ shift and go to state 20 ]
+  ! *               [ shift and go to state 21 ]
+  ! /               [ shift and go to state 22 ]
+
+
+state 31
+
+    (16) exp -> ( exp ) .
+
+    ;               reduce using rule 16 (exp -> ( exp ) .)
+    +               reduce using rule 16 (exp -> ( exp ) .)
+    -               reduce using rule 16 (exp -> ( exp ) .)
+    *               reduce using rule 16 (exp -> ( exp ) .)
+    /               reduce using rule 16 (exp -> ( exp ) .)
+    ^               reduce using rule 16 (exp -> ( exp ) .)
+    )               reduce using rule 16 (exp -> ( exp ) .)
+

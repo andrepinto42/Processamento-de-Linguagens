@@ -1,0 +1,14 @@
+rdef FIX
+marco -> Marco
+200 escudos -> 1€
+
+rdef FIX2
+@-> at 
+[.] -> ponto 
+
+rmdef EN2PT
+the -> o
+cat -> gato
+is sleeping -> esta a dormir
+(\w+) -> ?\1
+!!
